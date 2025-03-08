@@ -18,7 +18,7 @@ const RegisterForm = () => {
   // 錯誤訊息狀態
   const [errorMessage, setErrorMessage] = useState("");
 
-  // 從 Zustand store 獲取註冊方法和加載狀態
+  // 從 Zustand store 獲取註冊方法和載入狀態
   const { signUp, isLoading, error } = useUserStore();
 
   // 處理輸入變化
@@ -60,7 +60,7 @@ const RegisterForm = () => {
     }
 
     if (formData.password.length < 6) {
-      setErrorMessage("密碼長度必須至少為 6 個字符");
+      setErrorMessage("密碼長度必須至少為 6 個字元");
       return;
     }
 
@@ -84,7 +84,7 @@ const RegisterForm = () => {
       return;
     }
 
-    // 準備用戶數據
+    // 準備使用者資料
     const userData = {
       name: formData.name,
       role: formData.role,
@@ -104,7 +104,7 @@ const RegisterForm = () => {
     if (!success) {
       setErrorMessage(error?.message || "註冊失敗，請稍後再試");
     }
-    // 註冊成功後，用戶將被重定向到主頁面（通過路由處理）
+    // 註冊成功後，使用者將被重新導向到主頁面（透過路由處理）
   };
 
   // 渲染第一步 - 基本資訊表單
@@ -181,7 +181,7 @@ const RegisterForm = () => {
             value={formData.password}
             onChange={handleChange}
             className="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            placeholder="至少 6 個字符"
+            placeholder="至少 6 個字元"
           />
         </div>
       </div>

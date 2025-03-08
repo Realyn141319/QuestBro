@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import BoardPage from "./pages/board/BoardPage";
+import ProfilePage from "./pages/profile/ProfilePage";
 import useUserStore from "./store/userStore";
 import "./App.css";
 
@@ -24,6 +25,7 @@ function App() {
 
         {/* 應用程序路由 */}
         <Route path="/" element={<BoardPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
 
         {/* 重定向所有未匹配的路由到首頁 */}
         <Route path="*" element={<Navigate to="/" replace />} />

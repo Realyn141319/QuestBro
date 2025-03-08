@@ -6,14 +6,14 @@ import useUserStore from "../../store/userStore";
 import useTaskStore from "../../store/taskStore";
 
 const BoardPage = () => {
-  // 從 Zustand store 獲取用戶狀態和任務狀態
+  // 從 Zustand store 獲取使用者狀態和任務狀態
   const { user, isLoading: userLoading, initialize } = useUserStore();
   const { initializeTasks, subscribeToTaskUpdates, unsubscribe } =
     useTaskStore();
 
-  // 初始化用戶資料和任務資料
+  // 初始化使用者資料和任務資料
   useEffect(() => {
-    // 初始化用戶資料
+    // 初始化使用者資料
     initialize();
 
     // 初始化任務資料
@@ -30,7 +30,7 @@ const BoardPage = () => {
     };
   }, [initialize, initializeTasks, subscribeToTaskUpdates, unsubscribe]);
 
-  // 如果未登入，重定向到登入頁面
+  // 如果未登入，重新導向到登入頁面
   if (!userLoading && !user) {
     return <Navigate to="/login" replace />;
   }

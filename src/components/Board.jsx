@@ -10,7 +10,7 @@ const difficulties = {
   epic: { label: "史詩", color: "red", xpReward: 100 },
 };
 
-// 專案初始數據
+// 專案初始資料
 const initialData = {
   tasks: {
     "task-1": {
@@ -184,7 +184,7 @@ const Board = () => {
 
     setBoardData(newState);
 
-    // 當任務移動到「已完成」欄位時，顯示獎勵並更新統計數據
+    // 當任務移動到「已完成」欄位時，顯示獎勵並更新統計資料
     if (destinationColumn.id === "column-3" && sourceColumn.id !== "column-3") {
       const difficulty = difficulties[task.difficulty];
       const xpReward = difficulty.xpReward;
@@ -196,7 +196,7 @@ const Board = () => {
         points: task.points,
       });
 
-      // 更新遊戲統計數據
+      // 更新遊戲統計資料
       setStats((prevStats) => {
         const newTotalXp = prevStats.totalXp + xpReward;
         const newCompletedTasks = prevStats.completedTasks + 1;

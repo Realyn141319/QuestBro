@@ -41,7 +41,7 @@ const LoginForm = () => {
     if (!success) {
       setErrorMessage(error?.message || "登入失敗，請檢查您的帳號和密碼");
     }
-    // 登入成功後，用戶將被重定向到主頁面（通過路由處理）
+    // 登入成功後，使用者將被重新導向到主頁面（透過路由處理）
   };
 
   return (

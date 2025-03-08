@@ -286,7 +286,7 @@ const useUserStore = create((set, get) => ({
     const xpPerLevel = 100;
     const newLevel = Math.floor(newTotalXp / xpPerLevel) + 1;
 
-    // 如果升級了，顯示升級信息
+    // 如果升級了，顯示升級訊息
     const didLevelUp = newLevel > currentLevel;
 
     // 更新資料庫

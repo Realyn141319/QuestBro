@@ -5,10 +5,10 @@ import LoginForm from "../../components/auth/LoginForm";
 import useUserStore from "../../store/userStore";
 
 const LoginPage = () => {
-  // 從 Zustand store 獲取用戶狀態
+  // 從 Zustand store 獲取使用者狀態
   const { user, isLoading } = useUserStore();
 
-  // 如果已經登入，重定向到首頁
+  // 如果已經登入，重新導向到首頁
   if (user && !isLoading) {
     return <Navigate to="/" replace />;
   }

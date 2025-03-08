@@ -89,13 +89,13 @@ export const TAG_CATEGORIES = {
 export const GAME_EFFECTS = {
   LEVEL_UP: {
     title: "等級提升！",
-    message: (level) => `你現在已經達到等級 ${level}`,
+    message: (level) => `您現在已經達到等級 ${level}`,
     duration: 5000,
     effect: "confetti",
   },
   ACHIEVEMENT: {
     title: "成就解鎖！",
-    message: (achievement) => `你解鎖了「${achievement}」成就`,
+    message: (achievement) => `您解鎖了「${achievement}」成就`,
     duration: 5000,
     effect: "achievement",
   },
@@ -107,13 +107,13 @@ export const GAME_EFFECTS = {
   },
   TREASURE: {
     title: "獲得寶箱！",
-    message: "點擊開啟寶箱，獲取隨機獎勵",
+    message: "點選開啟寶箱，獲取隨機獎勵",
     duration: 8000,
     effect: "shine",
   },
   ROLE_BONUS: {
     title: "角色加成！",
-    message: (bonus, role) => `因為你是${role}，獲得 ${bonus} 額外獎勵`,
+    message: (bonus, role) => `因為您是${role}，獲得 ${bonus} 額外獎勵`,
     duration: 3000,
     effect: "pulse",
   },

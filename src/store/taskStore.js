@@ -4,7 +4,7 @@ import useUserStore from "./userStore";
 
 // 任務狀態管理
 const useTaskStore = create((set, get) => ({
-  // 任務數據
+  // 任務資料
   tasks: {},
   columns: {
     "column-1": {
@@ -30,7 +30,7 @@ const useTaskStore = create((set, get) => ({
   error: null,
   subscription: null,
 
-  // 初始化任務數據
+  // 初始化任務資料
   initializeTasks: async () => {
     set({ isLoading: true });
     try {
@@ -41,7 +41,7 @@ const useTaskStore = create((set, get) => ({
         return;
       }
 
-      // 將任務數據轉換為適合 UI 的格式
+      // 將任務資料轉換為適合 UI 的格式
       const tasks = {};
       const columns = {
         "column-1": {
@@ -110,7 +110,7 @@ const useTaskStore = create((set, get) => ({
         return { success: false, error: "使用者未登入" };
       }
 
-      // 準備任務數據
+      // 準備任務資料
       const newTask = {
         title: taskData.title,
         description: taskData.description || "",
@@ -393,7 +393,7 @@ const useTaskStore = create((set, get) => ({
 
             if (!oldTask) return state;
 
-            // 更新任務數據
+            // 更新任務資料
             const updatedTasks = {
               ...state.tasks,
               [taskId]: {
