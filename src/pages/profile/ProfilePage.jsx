@@ -28,10 +28,10 @@ const ProfilePage = () => {
     initializeProfilePage();
   }, [user, fetchProfile, fetchAchievements]);
 
-  // 如果未登入，重新導向到登入頁面
-  if (!isLoading && !user) {
-    return <Navigate to="/login" replace />;
-  }
+  // 不再檢查登入狀態，直接顯示個人資料頁面
+  // if (!isLoading && !user) {
+  //   return <Navigate to="/login" replace />;
+  // }
 
   return (
     <div className="min-h-screen bg-gray-50">

@@ -1,6 +1,20 @@
 import { create } from "zustand";
 import { auth, api } from "../lib/supabase";
 
+// 預設帳號資訊
+const DEFAULT_USER = {
+  email: "demo@questbro.com",
+  password: "demo123",
+  userData: {
+    name: "測試帳號",
+    role: "executor", // 執行者角色
+    level: 3,
+    xp: 230,
+    completedTasks: 12,
+    createdAt: new Date().toISOString(),
+  },
+};
+
 // 角色相關資料
 export const ROLES = {
   STRATEGIST: {
@@ -109,17 +123,39 @@ const useUserStore = create((set, get) => ({
   isLoading: false,
   error: null,
 
-  // 初始化 - 檢查當前登入狀態
+  // 初始化 - 檢查當前登入狀態，如果未登入則使用預設帳號
   initialize: async () => {
     set({ isLoading: true });
     try {
       const { user, error } = await auth.getUser();
 
       if (user) {
+        // 已經登入，直接獲取資料
         set({ user });
         await get().fetchProfile(user.id);
       } else {
-        set({ user: null, profile: null });
+        // 未登入，嘗試使用預設帳號
+        console.log("未檢測到登入狀態，嘗試使用預設帳號自動登入");
+
+        // 先嘗試登入
+        const signInResult = await get().signIn(
+          DEFAULT_USER.email,
+          DEFAULT_USER.password
+        );
+
+        if (!signInResult.success) {
+          // 登入失敗，嘗試註冊
+          console.log("預設帳號登入失敗，嘗試註冊預設帳號");
+          const signUpResult = await get().signUp(
+            DEFAULT_USER.email,
+            DEFAULT_USER.password,
+            DEFAULT_USER.userData
+          );
+
+          if (!signUpResult.success) {
+            console.error("預設帳號註冊失敗", signUpResult.error);
+          }
+        }
       }
 
       if (error) {
@@ -127,6 +163,7 @@ const useUserStore = create((set, get) => ({
       }
     } catch (err) {
       set({ error: err.message });
+      console.error("初始化過程出錯", err);
     } finally {
       set({ isLoading: false });
     }
@@ -136,16 +173,22 @@ const useUserStore = create((set, get) => ({
   signUp: async (email, password, userData) => {
     set({ isLoading: true, error: null });
     try {
-      const { data, error } = await auth.signUp(email, password, userData);
+      const { error } = await auth.signUp(email, password, userData);
 
       if (error) {
         set({ error: error.message });
         return { success: false, error };
       }
 
-      // 註冊成功後，直接初始化使用者資料
-      await get().initialize();
-      return { success: true, data };
+      // 註冊成功後，直接登入
+      const signInResult = await get().signIn(email, password);
+
+      if (!signInResult.success) {
+        set({ error: "註冊成功但自動登入失敗，請手動登入" });
+        return { success: true, error: signInResult.error };
+      }
+
+      return { success: true, data: signInResult.data };
     } catch (err) {
       set({ error: err.message });
       return { success: false, error: err };

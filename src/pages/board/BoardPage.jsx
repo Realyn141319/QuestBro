@@ -6,8 +6,8 @@ import useUserStore from "../../store/userStore";
 import useTaskStore from "../../store/taskStore";
 
 const BoardPage = () => {
-  // 從 Zustand store 獲取使用者狀態和任務狀態
-  const { user, isLoading: userLoading, initialize } = useUserStore();
+  // 從 Zustand store 獲取初始化方法
+  const { initialize } = useUserStore();
   const { initializeTasks, subscribeToTaskUpdates, unsubscribe } =
     useTaskStore();
 
@@ -30,10 +30,10 @@ const BoardPage = () => {
     };
   }, [initialize, initializeTasks, subscribeToTaskUpdates, unsubscribe]);
 
-  // 如果未登入，重新導向到登入頁面
-  if (!userLoading && !user) {
-    return <Navigate to="/login" replace />;
-  }
+  // 不再檢查登入狀態，直接顯示看板
+  // if (!userLoading && !user) {
+  //   return <Navigate to="/login" replace />;
+  // }
 
   return (
     <div className="min-h-screen bg-gray-50">
